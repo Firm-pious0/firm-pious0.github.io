@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rasheed Abdulmateen | Developer Portfolio</title>
+<meta name="description" content="Portfolio of Rasheed Abdulmateen: web developer, Python programmer and networking student.">
+<style>
+  /* NAME PLACEHOLDER: change the spelling here and in the hero/footer if needed */
+  :root {
+    --bg: #0a0c12;
+    --panel: #121622;
+    --panel-2: #181d2c;
+    --text: #e7eaf3;
+    --muted: #9aa3b8;
+    --accent: #5eead4;
+    --accent-2: #8b5cf6;
+    --radius: 16px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+  a { color: inherit; text-decoration: none; }
+  .container { width: min(1100px, 92%); margin: 0 auto; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+    backdrop-filter: blur(12px);
+    background: rgba(10, 12, 18, 0.7);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  nav .container { display: flex; justify-content: space-between; align-items: center; height: 64px; }
+  .logo { font-weight: 800; letter-spacing: 0.5px; }
+  .logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 24px; }
+  .nav-links a { color: var(--muted); font-size: 0.95rem; transition: color .2s; }
+  .nav-links a:hover { color: var(--text); }
+  .menu-btn { display: none; background: none; border: 0; color: var(--text); font-size: 1.6rem; cursor: pointer; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh; display: flex; align-items: center; position: relative; padding-top: 80px;
+  }
+  .hero::before, .hero::after {
+    content: ""; position: absolute; border-radius: 50%; filter: blur(90px); opacity: .35; z-index: -1;
+  }
+  .hero::before { width: 420px; height: 420px; background: var(--accent-2); top: 10%; left: -120px; }
+  .hero::after { width: 380px; height: 380px; background: var(--accent); bottom: 5%; right: -100px; }
+  .badge {
+    display: inline-block; padding: 6px 14px; border-radius: 999px;
+    border: 1px solid rgba(94,234,212,.35); color: var(--accent); font-size: .85rem; margin-bottom: 20px;
+  }
+  .hero h1 { font-size: clamp(2.4rem, 6vw, 4.2rem); line-height: 1.1; font-weight: 800; }
+  .gradient {
+    background: linear-gradient(120deg, var(--accent), var(--accent-2));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .hero p.lead { color: var(--muted); font-size: 1.1rem; max-width: 560px; margin: 20px 0 32px; }
+  .btn {
+    display: inline-block; padding: 13px 26px; border-radius: 10px; font-weight: 600;
+    transition: transform .2s, box-shadow .2s; border: 0; cursor: pointer; font-size: 1rem;
+  }
+  .btn-primary { background: linear-gradient(120deg, var(--accent), var(--accent-2)); color: #05070c; }
+  .btn-ghost { border: 1px solid rgba(255,255,255,.15); color: var(--text); margin-left: 12px; }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(94,234,212,.2); }
+  .hero-meta { margin-top: 36px; display: flex; gap: 32px; flex-wrap: wrap; color: var(--muted); font-size: .9rem; }
+  .hero-meta strong { display: block; color: var(--text); font-size: 1.4rem; }
+
+  /* SECTIONS */
+  section { padding: 100px 0; }
+  .section-title { font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 800; margin-bottom: 12px; }
+  .section-sub { color: var(--muted); margin-bottom: 48px; max-width: 640px; }
+  .eyebrow { color: var(--accent); font-size: .85rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; }
+
+  /* SKILLS */
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
+  .skill-card {
+    background: var(--panel); border: 1px solid rgba(255,255,255,.06);
+    border-radius: var(--radius); padding: 28px; transition: transform .25s, border-color .25s;
+  }
+  .skill-card:hover { transform: translateY(-4px); border-color: rgba(94,234,212,.35); }
+  .skill-icon { font-size: 1.8rem; margin-bottom: 14px; }
+  .skill-card h3 { margin-bottom: 16px; }
+  .bar { height: 6px; background: var(--panel-2); border-radius: 999px; margin-bottom: 14px; overflow: hidden; }
+  .bar span {
+    display: block; height: 100%; width: 0;
+    background: linear-gradient(90deg, var(--accent), var(--accent-2)); border-radius: 999px;
+    transition: width 1.2s ease;
+  }
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+  .tag { font-size: .8rem; padding: 4px 10px; border-radius: 8px; background: var(--panel-2); color: var(--muted); }
+
+  /* PROJECTS */
+  .projects { background: linear-gradient(180deg, transparent, rgba(139,92,246,.06), transparent); }
+  .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 28px; }
+  .project {
+    background: var(--panel); border: 1px solid rgba(255,255,255,.06);
+    border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column;
+    transition: transform .25s;
+  }
+  .project:hover { transform: translateY(-6px); }
+  .project-img { height: 180px; position: relative; }
+  .project-img.p1 { background: linear-gradient(135deg, #0ea5e9, #6366f1 60%, #a855f7); }
+  .project-img.p2 { background: linear-gradient(135deg, #14b8a6, #22c55e 60%, #84cc16); }
+  .project-img.p3 { background: linear-gradient(135deg, #f97316, #ec4899 60%, #8b5cf6); }
+  .project-img::after {
+    content: attr(data-label); position: absolute; left: 16px; bottom: 14px;
+    font-family: ui-monospace, Menlo, Consolas, monospace; font-size: .8rem;
+    background: rgba(0,0,0,.45); padding: 4px 10px; border-radius: 6px;
+  }
+  .project-body { padding: 24px; display: flex; flex-direction: column; flex: 1; }
+  .project-body h3 { margin-bottom: 8px; }
+  .project-body p { color: var(--muted); font-size: .95rem; flex: 1; margin-bottom: 18px; }
+  .project-links { display: flex; gap: 16px; font-weight: 600; font-size: .9rem; }
+  .project-links a { color: var(--accent); }
+  .project-links a:hover { text-decoration: underline; }
+
+  /* CONTACT */
+  .contact-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+  .contact-info p { color: var(--muted); margin-bottom: 24px; }
+  .contact-item { display: flex; gap: 14px; align-items: center; margin-bottom: 16px; color: var(--text); }
+  .contact-item span.ic {
+    width: 42px; height: 42px; border-radius: 12px; background: var(--panel-2);
+    display: grid; place-items: center; font-size: 1.1rem;
+  }
+  form { background: var(--panel); border: 1px solid rgba(255,255,255,.06); border-radius: var(--radius); padding: 28px; display: grid; gap: 14px; }
+  input, textarea {
+    width: 100%; padding: 14px; border-radius: 10px; border: 1px solid rgba(255,255,255,.08);
+    background: var(--bg); color: var(--text); font: inherit;
+  }
+  input:focus, textarea:focus { outline: none; border-color: var(--accent); }
+  textarea { min-height: 130px; resize: vertical; }
+  form .btn { width: 100%; }
+  .form-msg { color: var(--accent); font-size: .9rem; min-height: 1.2em; }
+
+  footer { border-top: 1px solid rgba(255,255,255,.06); padding: 28px 0; color: var(--muted); font-size: .9rem; text-align: center; }
+
+  /* REVEAL */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  /* RESPONSIVE */
+  @media (max-width: 800px) {
+    .menu-btn { display: block; }
+    .nav-links {
+      position: absolute; top: 64px; left: 0; right: 0; flex-direction: column; gap: 0;
+      background: var(--panel); display: none; padding: 12px 0;
+    }
+    .nav-links.open { display: flex; }
+    .nav-links a { padding: 12px 6%; }
+    .contact-wrap { grid-template-columns: 1fr; gap: 32px; }
+    .btn-ghost { margin-left: 0; margin-top: 12px; display: inline-block; }
+    section { padding: 72px 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+    .reveal { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <a href="#top" class="logo">Rasheed<span>.dev</span></a>
+    <div class="nav-links" id="navLinks">
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <button class="menu-btn" id="menuBtn" aria-label="Toggle menu">&#9776;</button>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="container">
+    <span class="badge">Open to freelance and remote work</span>
+    <h1>Hi, I'm <span class="gradient">Rasheed Abdulmateen</span>.<br>I build clean web apps and secure networks.</h1>
+    <p class="lead">Computer Science student at LAUTECH, Nigeria. I hand-code fast, responsive websites in HTML, CSS and JavaScript, write Python tools, and design networks in Cisco Packet Tracer.</p>
+    <a href="#projects" class="btn btn-primary">View my work</a>
+    <a href="#contact" class="btn btn-ghost">Get in touch</a>
+    <div class="hero-meta">
+      <div><strong>3+</strong>Projects shipped</div>
+      <div><strong>HTML/CSS/JS</strong>Hand-coded, no templates</div>
+      <div><strong>Python</strong>Scripts and automation</div>
+    </div>
+  </div>
+</header>
+
+<section id="skills">
+  <div class="container">
+    <p class="eyebrow reveal">What I do</p>
+    <h2 class="section-title reveal">Skills</h2>
+    <p class="section-sub reveal">The tools I use every day, with a rough sense of how deep I go in each.</p>
+    <div class="skills-grid">
+      <div class="skill-card reveal">
+        <div class="skill-icon">&lt;/&gt;</div>
+        <h3>HTML, CSS, JavaScript</h3>
+        <div class="bar"><span data-width="88"></span></div>
+        <div class="tags"><span class="tag">Responsive design</span><span class="tag">DOM</span><span class="tag">Flexbox/Grid</span><span class="tag">Animations</span></div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">&#128013;</div>
+        <h3>Python</h3>
+        <div class="bar"><span data-width="78"></span></div>
+        <div class="tags"><span class="tag">Scripting</span><span class="tag">Automation</span><span class="tag">Data handling</span><span class="tag">Problem solving</span></div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">&#128225;</div>
+        <h3>Networking</h3>
+        <div class="bar"><span data-width="72"></span></div>
+        <div class="tags"><span class="tag">Cisco Packet Tracer</span><span class="tag">TCP/IP</span><span class="tag">Subnetting</span><span class="tag">LAN setup</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects" class="projects">
+  <div class="container">
+    <p class="eyebrow reveal">Selected work</p>
+    <h2 class="section-title reveal">Projects</h2>
+    <p class="section-sub reveal">Sample projects. Replace the descriptions and links with your real work before publishing.</p>
+    <div class="project-grid">
+      <article class="project reveal">
+        <div class="project-img p1" data-label="landing-page.html"></div>
+        <div class="project-body">
+          <h3>Bakery Landing Page</h3>
+          <p>Responsive one-page website for a small Ibadan bakery with a menu, order section and WhatsApp button. Built with plain HTML and CSS.</p>
+          <div class="project-links"><a href="#">Live demo</a><a href="#">Source</a></div>
+        </div>
+      </article>
+      <article class="project reveal">
+        <div class="project-img p2" data-label="budget-tracker.js"></div>
+        <div class="project-body">
+          <h3>Budget Tracker</h3>
+          <p>Browser app to log income and expenses, save data to localStorage and show a monthly summary. Vanilla JavaScript, no libraries.</p>
+          <div class="project-links"><a href="#">Live demo</a><a href="#">Source</a></div>
+        </div>
+      </article>
+      <article class="project reveal">
+        <div class="project-img p3" data-label="campus_network.pkt"></div>
+        <div class="project-body">
+          <h3>Campus LAN Design</h3>
+          <p>Packet Tracer lab simulating a multi-VLAN campus network with routing, DHCP and access control lists. Includes a written walkthrough.</p>
+          <div class="project-links"><a href="#">Project files</a><a href="#">Walkthrough</a></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container contact-wrap">
+    <div class="contact-info reveal">
+      <p class="eyebrow">Let's talk</p>
+      <h2 class="section-title">Have a project in mind?</h2>
+      <p>Send me a short brief: what you need, your deadline and your budget. I reply within 24 hours.</p>
+      <div class="contact-item"><span class="ic">&#9993;</span> <a href="mailto:rasheedabdmateen@gmail.com">rasheedabdmateen@gmail.com</a></div>
+      <div class="contact-item"><span class="ic">&#128279;</span> <a href="https://github.com/Firm-pious0">github.com/Firm-pious0</a></div>
+      <div class="contact-item"><span class="ic">&#128205;</span> Ogbomoso, Oyo State, Nigeria</div>
+    </div>
+    <form id="contactForm" class="reveal">
+      <input type="text" id="name" placeholder="Your name" required>
+      <input type="email" id="email" placeholder="Your email" required>
+      <textarea id="message" placeholder="Tell me about your project" required></textarea>
+      <button type="submit" class="btn btn-primary">Send message</button>
+      <p class="form-msg" id="formMsg"></p>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="container">&copy; <span id="year"></span> Rasheed Abdulmateen. Built by hand with HTML, CSS and JavaScript.</div>
+</footer>
+
+<script>
+  // Year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Mobile menu
+  const menuBtn = document.getElementById('menuBtn');
+  const navLinks = document.getElementById('navLinks');
+  menuBtn.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  // Reveal on scroll + animate skill bars
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        entry.target.querySelectorAll('.bar span').forEach(bar => {
+          bar.style.width = bar.dataset.width + '%';
+        });
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Demo contact form (no backend: shows a confirmation only)
+  document.getElementById('contactForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    document.getElementById('formMsg').textContent = 'Thanks! This is a demo form. Connect it to Formspree or EmailJS to receive messages.';
+    e.target.reset();
+  });
+</script>
+</body>
+</html>
